@@ -24,9 +24,10 @@ double getPidMemory(DWORD processID)
 }
 
 int main() {
-    int pid        = 26012; // PID of target process
+    int pid        = 11736; // PID of target process
     int t_interval = 1; // Sample interval (sec)
-    int t_period   = 1000; // Sample time (sec)
+    int t_period   = 2000; // Sample time (sec)
+    int stop       = -1;
     auto t_start   = clock();
     auto t_current = clock();
 
@@ -35,6 +36,10 @@ int main() {
             t_current = clock();
             double memory = getPidMemory(pid);
             std::cout << memory << std::endl;
+            if (memory == 0){
+                if (stop != 0) stop = 0;
+                else break;
+            }
         }
     }
 
